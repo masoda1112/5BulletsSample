@@ -17,7 +17,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyLife = 5;
+        enemyLife = 50;
         enemyLifeText.text = "Life:" + enemyLife;
     }
 
@@ -33,9 +33,12 @@ public class EnemyScript : MonoBehaviour
     {
         Destroy(collision.gameObject);
         enemyLife -= collision.gameObject.GetComponent<BulletScript>().power;
+        player.GetComponent<PlayerScript>().bulletCount -= 1;
         enemyLifeText.text = "Life:" + enemyLife;
-        player.GetComponent<PlayerScript>().bulletLevel -= 1;
-        bulletLevelText.text = "BulletLevel:" + player.GetComponent<PlayerScript>().bulletLevel;
+        if(player.GetComponent<PlayerScript>().bulletCount < 4){
+            player.GetComponent<PlayerScript>().bulletLevel -= 1;
+            bulletLevelText.text = "BulletLevel:" + player.GetComponent<PlayerScript>().bulletLevel;
+        }
         if(enemyLife <= 0){
             enemyLifeText.text = "Life:" + 0;
             Destroy(gameObject);

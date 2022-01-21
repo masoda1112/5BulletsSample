@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     public Text resultText;
     public Text retryText;
     public Text bulletLevelText;
+    public int bulletCount;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,9 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return)) {
             GameObject shot = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 3, 0f), transform.rotation);
             shot.GetComponent<BulletScript>().Setting(bulletLevel);
-            if(bulletLevel < 5){
+            bulletCount += 1;
+            settingBulletColor(shot);
+            if(bulletCount < 5){
                 bulletLevel += 1;
                 updateBulletLevelText();
             }
@@ -41,6 +44,20 @@ public class PlayerScript : MonoBehaviour
 
         if(Input.GetKey(KeyCode.Space)){
             SceneManager.LoadScene("MainScene");
+        }
+    }
+
+    public void settingBulletColor(GameObject shot){
+        if(bulletLevel == 1){
+            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+        }else if(bulletLevel == 2){
+            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        }else if(bulletLevel == 3){
+            shot.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+        }else if(bulletLevel == 4){
+            shot.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        }else if(bulletLevel == 5){
+            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
         }
     }
 
