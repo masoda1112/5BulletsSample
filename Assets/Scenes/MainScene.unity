@@ -604,7 +604,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &535981690
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1479,6 +1479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletLevel: 0
   bullet: {fileID: 4721066957983884755, guid: c7ec3fc15ff7542a5ad9c65a2ef103a5, type: 3}
+  gameController: {fileID: 1995900079}
   resultText: {fileID: 1635150460}
   retryText: {fileID: 314561703}
   bulletLevelText: {fileID: 1358628277}
@@ -1560,6 +1561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 535981689}
+  resultText: {fileID: 1635150460}
+  retryText: {fileID: 314561703}
 --- !u!4 &1995900081
 Transform:
   m_ObjectHideFlags: 0
@@ -1675,6 +1678,7 @@ MonoBehaviour:
   enemyLife: 0
   bullet: {fileID: 0}
   player: {fileID: 1990843246}
+  gameController: {fileID: 1995900079}
   resultText: {fileID: 1635150460}
   retryText: {fileID: 314561703}
   enemyLifeText: {fileID: 110420468}

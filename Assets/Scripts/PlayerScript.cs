@@ -8,6 +8,7 @@ public class PlayerScript : MonoBehaviour
 {
     public int bulletLevel;
     public GameObject bullet;
+    public GameObject gameController;
     public Text resultText;
     public Text retryText;
     public Text bulletLevelText;
@@ -17,7 +18,6 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         bulletLevel = 1;
-        Time.timeScale = 1.0f;
         updateBulletLevelText();
     }
 
@@ -64,11 +64,11 @@ public class PlayerScript : MonoBehaviour
     public void updateBulletLevelText(){
         bulletLevelText.text = "BulletLevel:" + bulletLevel;
     }
+
     void OnCollisionEnter2D(Collision2D collision){
         Destroy(gameObject);
         Destroy(collision.gameObject);
-        resultText.text = "Lose...";
-        resultText.text = "Hit SPACE to replay！";
-        Time.timeScale = 0;
+        gameController.GetComponent<GameControllerScript>().GameOver();
+
     }
 }

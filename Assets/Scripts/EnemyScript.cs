@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     public int enemyLife;
     public GameObject bullet;
     public GameObject player;
+    public GameObject gameController;
     public Text resultText;
     public Text retryText;
     public Text enemyLifeText;
@@ -24,9 +25,6 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space)){
-            SceneManager.LoadScene("MainScene");
-        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -41,10 +39,8 @@ public class EnemyScript : MonoBehaviour
         }
         if(enemyLife <= 0){
             enemyLifeText.text = "Life:" + 0;
+            gameController.GetComponent<GameControllerScript>().GameClear();
             Destroy(gameObject);
-            resultText.text = "Win!!!";
-            resultText.text = "Hit SPACE to replay！";
-            Time.timeScale = 0;
         }
     }
 }
