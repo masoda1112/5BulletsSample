@@ -9,8 +9,6 @@ public class PlayerScript : MonoBehaviour
     public int bulletLevel;
     public GameObject bullet;
     public GameObject gameController;
-    public Text resultText;
-    public Text retryText;
     public Text bulletLevelText;
     public int bulletCount;
 
@@ -32,6 +30,15 @@ public class PlayerScript : MonoBehaviour
         );
 
         if(Input.GetKeyDown(KeyCode.Return)) {
+            Shoot();
+	    }
+
+        if(Input.GetKey(KeyCode.Space)){
+            SceneManager.LoadScene("MainScene");
+        }
+    }
+
+    private void Shoot(){
             GameObject shot = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 3, 0f), transform.rotation);
             shot.GetComponent<BulletScript>().Setting(bulletLevel);
             bulletCount += 1;
@@ -40,24 +47,20 @@ public class PlayerScript : MonoBehaviour
                 bulletLevel += 1;
                 updateBulletLevelText();
             }
-	    }
-
-        if(Input.GetKey(KeyCode.Space)){
-            SceneManager.LoadScene("MainScene");
-        }
     }
 
     public void settingBulletColor(GameObject shot){
+        Renderer shotRenderer = shot.GetComponent<Renderer>();
         if(bulletLevel == 1){
-            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+            shotRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
         }else if(bulletLevel == 2){
-            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+            shotRenderer.material.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         }else if(bulletLevel == 3){
-            shot.GetComponent<Renderer>().material.color = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+            shotRenderer.material.color = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         }else if(bulletLevel == 4){
-            shot.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+            shotRenderer.material.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
         }else if(bulletLevel == 5){
-            shot.GetComponent<Renderer>().material.color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
+            shotRenderer.material.color = new Color(1.0f, 0.0f, 1.0f, 1.0f);
         }
     }
 

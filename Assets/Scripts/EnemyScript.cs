@@ -10,8 +10,6 @@ public class EnemyScript : MonoBehaviour
     public GameObject bullet;
     public GameObject player;
     public GameObject gameController;
-    public Text resultText;
-    public Text retryText;
     public Text enemyLifeText;
     public Text bulletLevelText;
 
@@ -29,18 +27,42 @@ public class EnemyScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        PlayerScript playerScript = player.GetComponent<PlayerScript>();
+
         Destroy(collision.gameObject);
         enemyLife -= collision.gameObject.GetComponent<BulletScript>().power;
         player.GetComponent<PlayerScript>().bulletCount -= 1;
         enemyLifeText.text = "Life:" + enemyLife;
-        if(player.GetComponent<PlayerScript>().bulletCount < 4){
-            player.GetComponent<PlayerScript>().bulletLevel -= 1;
-            bulletLevelText.text = "BulletLevel:" + player.GetComponent<PlayerScript>().bulletLevel;
+
+        // Hit(collision.gameObject);
+
+        if(playerScript.bulletCount < 4){
+            BulletLevelOverWriting(playerScript);
         }
+
         if(enemyLife <= 0){
             enemyLifeText.text = "Life:" + 0;
             gameController.GetComponent<GameControllerScript>().GameClear();
             Destroy(gameObject);
         }
+    }
+
+    // できれば下のようにしたい
+    // private void Hit(GameObject object){
+    //     Destroy(object);
+    //     enemyLife -= object.GetComponent<BulletScript>().power;
+    //     player.GetComponent<PlayerScript>().bulletCount -= 1;
+    //     enemyLifeText.text = "Life:" + enemyLife;
+    // }
+
+    private void BulletLevelOverWriting(PlayerScript playerScript){
+        playerScript.bulletLevel -= 1;
+        bulletLevelText.text = "BulletLevel:" + playerScript.bulletLevel;
+    }
+
+    private void Destroyed(){
+        enemyLifeText.text = "Life:" + 0;
+        gameController.GetComponent<GameControllerScript>().GameClear();
+        Destroy(gameObject);
     }
 }
